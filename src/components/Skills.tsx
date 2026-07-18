@@ -100,7 +100,7 @@ export default function Skills() {
               className="h-full"
             >
               <div 
-                className="relative rounded-[24px] p-8 overflow-hidden group cursor-pointer h-full transition-all duration-500 ease-out hover:-translate-y-2 hover:scale-[1.02] hover:border-white/20 hover:border-t-white/30 hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.85),_0_0_20px_rgba(0,112,243,0.12)] flex flex-col"
+                className="relative rounded-[24px] p-6 md:p-8 overflow-hidden group cursor-pointer h-full transition-all duration-500 ease-out hover:-translate-y-2 hover:scale-[1.02] hover:border-white/20 hover:border-t-white/30 hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.85),_0_0_20px_rgba(0,112,243,0.12)] flex flex-col"
                 style={{
                   background: "rgba(15, 15, 15, 0.45)",
                   backdropFilter: "blur(20px)",

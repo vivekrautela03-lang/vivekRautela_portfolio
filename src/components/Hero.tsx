@@ -70,11 +70,11 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative w-full h-screen flex items-center justify-start overflow-hidden bg-[#050505] z-10"
+      className="relative w-full h-screen flex items-center justify-start overflow-hidden bg-white md:bg-[#050505] z-10"
     >
       {/* Fallback visual gradient before video loads */}
       <div
-        className={`absolute inset-0 bg-gradient-to-br from-[#050505] via-[#0F1117] to-[#050505] transition-opacity duration-1000 z-0 ${
+        className={`absolute inset-0 bg-white md:bg-gradient-to-br md:from-[#050505] md:via-[#0F1117] md:to-[#050505] transition-opacity duration-1000 z-0 ${
           isVideoLoaded ? "opacity-0" : "opacity-100"
         }`}
       />
@@ -85,7 +85,7 @@ export default function Hero() {
         muted
         loop
         playsInline
-        className="absolute inset-0 w-full h-full object-cover transition-all duration-1000 select-none pointer-events-none scale-105 opacity-100"
+        className="absolute inset-0 w-full h-full object-contain md:object-cover transition-all duration-1000 select-none pointer-events-none scale-100 md:scale-105 opacity-100"
       >
         <source
           src="https://res.cloudinary.com/qia3rzqk/video/upload/v1784386883/watermark-removed-dont_add_text_last_202607181153_y37s5u.mp4"

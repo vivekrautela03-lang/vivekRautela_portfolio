@@ -99,7 +99,7 @@ export default function Experience() {
                 <motion.div
                   initial={{ scale: 0.8, opacity: 0 }}
                   whileInView={{ scale: 1, opacity: 1 }}
-                  viewport={{ once: true, margin: "-100px" }}
+                  viewport={{ once: true, margin: "-30px" }}
                   transition={{ delay: 0.1, duration: 0.5 }}
                   className="absolute left-[9px] md:left-[25px] top-1.5 w-4 h-4 rounded-full bg-white border-2 border-[#0070f3] shadow-[0_0_10px_rgba(0,112,243,0.3)] group-hover:scale-125 group-hover:border-[#7928ca] group-hover:shadow-[0_0_15px_rgba(121,40,202,0.4)] transition-all duration-300 z-10"
                 />
@@ -108,7 +108,7 @@ export default function Experience() {
                 <motion.div
                   initial={{ opacity: 0, x: 30 }}
                   whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
+                  viewport={{ once: true, margin: "-30px" }}
                   transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
                   className="glass-card-light p-6 md:p-8 rounded-[28px] border border-black/5 relative overflow-hidden"
                 >

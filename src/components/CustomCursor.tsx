@@ -16,8 +16,26 @@ export default function CustomCursor() {
   const cursorXSpring = useSpring(cursorX, springConfig);
   const cursorYSpring = useSpring(cursorY, springConfig);
 
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
+
   useEffect(() => {
     setMounted(true);
+
+    // Detect if device is touch-primary (iOS/Android mobile/tablet)
+    const touchQuery = window.matchMedia("(pointer: coarse)");
+    setIsTouchDevice(touchQuery.matches);
+
+    const handleTouchChange = (e: MediaQueryListEvent) => {
+      setIsTouchDevice(e.matches);
+    };
+
+    // Listen for changes (e.g. rotating tablet/resizing screen)
+    if (touchQuery.addEventListener) {
+      touchQuery.addEventListener("change", handleTouchChange);
+    } else {
+      // Fallback for older browsers
+      touchQuery.addListener(handleTouchChange);
+    }
 
     const moveCursor = (e: MouseEvent) => {
       cursorX.set(e.clientX);
@@ -56,6 +74,11 @@ export default function CustomCursor() {
     document.addEventListener("mouseenter", handleMouseEnter);
 
     return () => {
+      if (touchQuery.removeEventListener) {
+        touchQuery.removeEventListener("change", handleTouchChange);
+      } else {
+        touchQuery.removeListener(handleTouchChange);
+      }
       window.removeEventListener("mousemove", moveCursor);
       window.removeEventListener("mouseover", handleMouseOver);
       document.removeEventListener("mouseleave", handleMouseLeave);
@@ -63,7 +86,7 @@ export default function CustomCursor() {
     };
   }, [cursorX, cursorY, hidden]);
 
-  if (!mounted || hidden) return null;
+  if (!mounted || hidden || isTouchDevice) return null;
 
   return (
     <motion.div

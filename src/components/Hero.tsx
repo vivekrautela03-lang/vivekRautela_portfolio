@@ -85,10 +85,7 @@ export default function Hero() {
         muted
         loop
         playsInline
-        onCanPlay={() => setIsVideoLoaded(true)}
-        className={`absolute inset-0 w-full h-full object-cover transition-all duration-1000 select-none pointer-events-none scale-105 ${
-          isVideoLoaded ? "opacity-100" : "opacity-0"
-        }`}
+        className="absolute inset-0 w-full h-full object-cover transition-all duration-1000 select-none pointer-events-none scale-105 opacity-100"
       >
         <source
           src="https://res.cloudinary.com/qia3rzqk/video/upload/v1784386883/watermark-removed-dont_add_text_last_202607181153_y37s5u.mp4"
@@ -121,7 +118,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.8 }}
-            className="text-5xl md:text-8xl font-heading font-extrabold tracking-tight text-[#050505] mb-4 select-none"
+            className="text-4xl sm:text-5xl md:text-8xl font-heading font-extrabold tracking-tight text-[#050505] mb-4 select-none"
           >
             Vivek Rautela
           </motion.h1>
@@ -135,7 +132,7 @@ export default function Hero() {
                 animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
                 exit={{ y: -25, opacity: 0, filter: "blur(4px)" }}
                 transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className="text-xl md:text-3xl font-heading font-medium tracking-wide text-slate-800"
+                className="text-lg sm:text-xl md:text-3xl font-heading font-medium tracking-wide text-slate-800"
               >
                 {ROLES[roleIndex]}
               </motion.span>
@@ -146,7 +143,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.8 }}
-            className="text-sm md:text-lg text-slate-900 max-w-lg leading-relaxed mb-10 font-semibold"
+            className="text-xs sm:text-sm md:text-lg text-slate-900 max-w-lg leading-relaxed mb-10 font-semibold"
           >
             I craft cinematic digital experiences where storytelling, design, engineering, and motion come together.
           </motion.p>
@@ -160,19 +157,19 @@ export default function Hero() {
           >
             <button
               onClick={() => handleScrollTo("projects")}
-              className="bg-[#050505] text-white border border-[#050505] hover:bg-slate-800 hover:border-slate-800 px-8 py-3.5 rounded-full text-xs font-bold uppercase tracking-wider text-center cursor-pointer transition-all duration-300 shadow-md"
+              className="bg-[#050505] text-white border border-[#050505] hover:bg-slate-800 hover:border-slate-800 px-5 py-3 sm:px-8 sm:py-3.5 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider text-center cursor-pointer transition-all duration-300 shadow-md"
             >
               View Projects
             </button>
             <button
               onClick={() => handleScrollTo("about")}
-              className="border border-[#050505] text-[#050505] hover:bg-[#050505]/10 px-8 py-3.5 rounded-full text-xs font-bold uppercase tracking-wider text-center cursor-pointer transition-all duration-300"
+              className="border border-[#050505] text-[#050505] hover:bg-[#050505]/10 px-5 py-3 sm:px-8 sm:py-3.5 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider text-center cursor-pointer transition-all duration-300"
             >
               Download Resume
             </button>
             <button
               onClick={() => handleScrollTo("contact")}
-              className="px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-slate-700 hover:text-black hover:underline transition-colors text-center cursor-pointer flex items-center justify-center gap-1"
+              className="px-4 py-3 sm:px-6 sm:py-3.5 text-[10px] sm:text-xs font-bold uppercase tracking-wider text-slate-700 hover:text-black hover:underline transition-colors text-center cursor-pointer flex items-center justify-center gap-1"
             >
               Contact Me
             </button>

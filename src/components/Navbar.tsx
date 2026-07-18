@@ -62,13 +62,19 @@ export default function Navbar() {
       <header
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
           scrolled
-            ? "glass-nav-scrolled py-3 shadow-lg"
-            : "bg-transparent py-6 border-b border-transparent"
+            ? "glass-nav-scrolled py-4 shadow-lg"
+            : "bg-transparent py-8 border-b border-transparent"
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
-          {/* Spacer to maintain flex layout alignment */}
-          <div className="w-0 md:w-auto" />
+          {/* Logo */}
+          <button
+            onClick={() => handleNavClick("home")}
+            className="flex items-center gap-1.5 font-heading text-xl md:text-2xl font-bold tracking-wider cursor-pointer group"
+          >
+            <span className={`transition-colors duration-300 ${scrolled ? "text-[#f8fafc] group-hover:text-[#00d2ff]" : "text-[#050505] group-hover:text-[#00d2ff]"}`}>VIVEK</span>
+            <span className={`transition-colors duration-300 ${scrolled ? "text-[#00d2ff] group-hover:text-white" : "text-[#00d2ff] group-hover:text-black"}`}>RAUTELA</span>
+          </button>
 
           {/* Desktop Nav Items */}
           <nav className={`hidden md:flex items-center gap-1.5 backdrop-blur-md rounded-full p-1.5 transition-all duration-300 ${
@@ -80,7 +86,7 @@ export default function Navbar() {
               <button
                 key={item.id}
                 onClick={() => handleNavClick(item.id)}
-                className={`relative px-4 py-1.5 rounded-full text-xs font-medium tracking-wide transition-all duration-300 cursor-pointer ${
+                className={`relative px-5 py-2 rounded-full text-sm font-semibold tracking-wide transition-all duration-300 cursor-pointer ${
                   activeSection === item.id
                     ? scrolled ? "text-[#050505]" : "text-[#f8fafc]"
                     : scrolled ? "text-slate-400 hover:text-white" : "text-slate-700 hover:text-black"
@@ -102,21 +108,25 @@ export default function Navbar() {
           <div className="hidden md:block">
             <button
               onClick={() => handleNavClick("contact")}
-              className={`px-4 py-2 rounded-full text-xs font-semibold tracking-wide flex items-center gap-1.5 cursor-pointer transition-all duration-300 ${
+              className={`px-5 py-2.5 rounded-full text-sm font-bold tracking-wide flex items-center gap-1.5 cursor-pointer transition-all duration-300 ${
                 scrolled
                   ? "glass-btn"
                   : "border border-black text-black hover:bg-black hover:text-white"
               }`}
             >
               Let's Talk
-              <ArrowUpRight className="w-3.5 h-3.5" />
+              <ArrowUpRight className="w-4 h-4" />
             </button>
           </div>
 
           {/* Mobile Menu Toggle */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 md:hidden text-[#f8fafc] hover:text-[#00d2ff] transition-colors cursor-pointer"
+            className={`p-2 md:hidden transition-colors cursor-pointer ${
+              scrolled
+                ? "text-[#f8fafc] hover:text-[#00d2ff]"
+                : "text-[#050505] hover:text-[#0070f3]"
+            }`}
             aria-label="Toggle menu"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}

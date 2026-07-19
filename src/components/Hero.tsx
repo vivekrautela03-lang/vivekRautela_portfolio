@@ -43,8 +43,18 @@ const SOCIAL_LINKS = [
 export default function Hero() {
   const [roleIndex, setRoleIndex] = useState(0);
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const mobileVideoRef = useRef<HTMLVideoElement>(null);
   const desktopVideoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -76,28 +86,25 @@ export default function Hero() {
       }
     };
 
-    const mobileEl = mobileVideoRef.current;
-    const desktopEl = desktopVideoRef.current;
+    const activeEl = isMobile ? mobileVideoRef.current : desktopVideoRef.current;
 
     // Attempt autoplay immediately
-    playVideo(mobileEl);
-    playVideo(desktopEl);
+    if (activeEl) playVideo(activeEl);
 
     // Auto resume if paused by browser automatically
-    if (mobileEl) mobileEl.addEventListener("pause", handleResume);
-    if (desktopEl) desktopEl.addEventListener("pause", handleResume);
+    if (activeEl) activeEl.addEventListener("pause", handleResume);
 
     // Trigger on scroll to ensure it plays while scrolling
     const handleScrollPlay = () => {
-      if (mobileEl && mobileEl.paused) mobileEl.play().catch(() => {});
-      if (desktopEl && desktopEl.paused) desktopEl.play().catch(() => {});
+      const active = isMobile ? mobileVideoRef.current : desktopVideoRef.current;
+      if (active && active.paused) active.play().catch(() => {});
     };
     window.addEventListener("scroll", handleScrollPlay, { passive: true });
 
     // Try again on user's first interaction if autoplay got blocked by strict mobile policies
     const resumePlayback = () => {
-      playVideo(mobileVideoRef.current);
-      playVideo(desktopVideoRef.current);
+      const active = isMobile ? mobileVideoRef.current : desktopVideoRef.current;
+      playVideo(active);
       // Remove listeners once playback starts
       window.removeEventListener("touchstart", resumePlayback);
       window.removeEventListener("click", resumePlayback);
@@ -107,13 +114,12 @@ export default function Hero() {
     window.addEventListener("click", resumePlayback, { passive: true });
 
     return () => {
-      if (mobileEl) mobileEl.removeEventListener("pause", handleResume);
-      if (desktopEl) desktopEl.removeEventListener("pause", handleResume);
+      if (activeEl) activeEl.removeEventListener("pause", handleResume);
       window.removeEventListener("scroll", handleScrollPlay);
       window.removeEventListener("touchstart", resumePlayback);
       window.removeEventListener("click", resumePlayback);
     };
-  }, []);
+  }, [isMobile]);
 
   const handleScrollTo = (id: string) => {
     const el = document.getElementById(id);
@@ -144,64 +150,68 @@ export default function Hero() {
       />
 
       {/* Cinematic Background Videos (Responsive) */}
-      {/* Mobile background video */}
-      <video
-        ref={mobileVideoRef}
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="auto"
-        className="absolute inset-0 w-full h-full object-cover object-center transition-all duration-1000 select-none pointer-events-none opacity-100 md:hidden"
-        style={{
-          objectFit: "cover",
-          width: "100%",
-          height: "100%",
-          position: "absolute",
-          inset: 0,
-        }}
-      >
-        <source
-          src="https://res.cloudinary.com/qia3rzqk/video/upload/w_720,c_scale,vc_h264/v1784439049/1000044059_gwr_video_mvp_wllvul.mp4"
-          type="video/mp4"
-          media="(min-width: 480px)"
-        />
-        <source
-          src="https://res.cloudinary.com/qia3rzqk/video/upload/w_480,c_scale,vc_h264/v1784439049/1000044059_gwr_video_mvp_wllvul.mp4"
-          type="video/mp4"
-        />
-      </video>
-
-      {/* Desktop/Laptop background video */}
-      <video
-        ref={desktopVideoRef}
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="auto"
-        className="absolute inset-0 w-full h-full object-cover object-center transition-all duration-1000 select-none pointer-events-none scale-105 opacity-100 hidden md:block"
-        style={{
-          objectFit: "cover",
-          width: "100%",
-          height: "100%",
-          position: "absolute",
-          inset: 0,
-        }}
-      >
-        <source
-          src="https://res.cloudinary.com/qia3rzqk/video/upload/w_1920,c_scale,vc_h264/v1784386883/watermark-removed-dont_add_text_last_202607181153_y37s5u.mp4"
-          type="video/mp4"
-          media="(min-width: 1200px)"
-        />
-        <source
-          src="https://res.cloudinary.com/qia3rzqk/video/upload/w_1280,c_scale,vc_h264/v1784386883/watermark-removed-dont_add_text_last_202607181153_y37s5u.mp4"
-          type="video/mp4"
-        />
-      </video>
+      {isMobile ? (
+        /* Mobile background video */
+        <video
+          key="mobile-video"
+          ref={mobileVideoRef}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          className="absolute inset-0 w-full h-full object-cover object-center transition-all duration-1000 select-none pointer-events-none opacity-100"
+          style={{
+            objectFit: "cover",
+            width: "100%",
+            height: "100%",
+            position: "absolute",
+            inset: 0,
+          }}
+        >
+          <source
+            src="https://res.cloudinary.com/qia3rzqk/video/upload/w_720,c_scale,vc_h264/v1784439049/1000044059_gwr_video_mvp_wllvul.mp4"
+            type="video/mp4"
+            media="(min-width: 480px)"
+          />
+          <source
+            src="https://res.cloudinary.com/qia3rzqk/video/upload/w_480,c_scale,vc_h264/v1784439049/1000044059_gwr_video_mvp_wllvul.mp4"
+            type="video/mp4"
+          />
+        </video>
+      ) : (
+        /* Desktop/Laptop background video */
+        <video
+          key="desktop-video"
+          ref={desktopVideoRef}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          className="absolute inset-0 w-full h-full object-cover object-center transition-all duration-1000 select-none pointer-events-none scale-105 opacity-100"
+          style={{
+            objectFit: "cover",
+            width: "100%",
+            height: "100%",
+            position: "absolute",
+            inset: 0,
+          }}
+        >
+          <source
+            src="https://res.cloudinary.com/qia3rzqk/video/upload/w_1920,c_scale,vc_h264/v1784386883/watermark-removed-dont_add_text_last_202607181153_y37s5u.mp4"
+            type="video/mp4"
+            media="(min-width: 1200px)"
+          />
+          <source
+            src="https://res.cloudinary.com/qia3rzqk/video/upload/w_1280,c_scale,vc_h264/v1784386883/watermark-removed-dont_add_text_last_202607181153_y37s5u.mp4"
+            type="video/mp4"
+          />
+        </video>
+      )}
 
       {/* Left-aligned Hero Content Wrapper */}
-      <div className="z-10 w-full max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-start h-full pt-20">
+      <div className="z-10 w-full max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-start h-full pt-36 md:pt-48">
         <motion.div
           initial={{ opacity: 0, x: -40 }}
           animate={{ opacity: 1, x: 0 }}
@@ -260,23 +270,25 @@ export default function Hero() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.8 }}
-            className="flex flex-col sm:flex-row items-stretch sm:items-center justify-start gap-4 w-full sm:w-auto"
+            className="flex flex-col gap-4 w-full sm:w-auto"
           >
-            <button
-              onClick={() => handleScrollTo("projects")}
-              className="bg-[#050505] text-white border border-[#050505] hover:bg-slate-800 hover:border-slate-800 px-5 py-3 sm:px-8 sm:py-3.5 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider text-center cursor-pointer transition-all duration-300 shadow-md"
-            >
-              View Projects
-            </button>
-            <button
-              onClick={() => handleScrollTo("about")}
-              className="border border-[#050505] text-[#050505] hover:bg-[#050505]/10 px-5 py-3 sm:px-8 sm:py-3.5 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider text-center cursor-pointer transition-all duration-300"
-            >
-              Download Resume
-            </button>
+            <div className="flex flex-row items-center gap-3 w-full sm:w-auto">
+              <button
+                onClick={() => handleScrollTo("projects")}
+                className="flex-1 sm:flex-none bg-[#050505] text-white border border-[#050505] hover:bg-slate-800 hover:border-slate-800 px-4 py-3 sm:px-8 sm:py-3.5 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider text-center cursor-pointer transition-all duration-300 shadow-md whitespace-nowrap"
+              >
+                View Projects
+              </button>
+              <button
+                onClick={() => handleScrollTo("about")}
+                className="flex-1 sm:flex-none border border-[#050505] text-[#050505] hover:bg-[#050505]/10 px-4 py-3 sm:px-8 sm:py-3.5 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider text-center cursor-pointer transition-all duration-300 whitespace-nowrap"
+              >
+                Download Resume
+              </button>
+            </div>
             <button
               onClick={() => handleScrollTo("contact")}
-              className="px-4 py-3 sm:px-6 sm:py-3.5 text-[10px] sm:text-xs font-bold uppercase tracking-wider text-slate-700 hover:text-black hover:underline transition-colors text-center cursor-pointer flex items-center justify-center gap-1"
+              className="px-4 py-2 text-[10px] sm:text-xs font-bold uppercase tracking-wider text-slate-700 hover:text-black hover:underline transition-colors text-left sm:text-center cursor-pointer flex items-center justify-start sm:justify-center gap-1"
             >
               Contact Me
             </button>

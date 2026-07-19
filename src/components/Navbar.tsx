@@ -57,26 +57,16 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        scrolled
-          ? "glass-nav-scrolled py-3 md:py-4 shadow-lg"
-          : "bg-transparent py-5 md:py-8 border-b border-transparent"
-      }`}
+      className="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-transparent py-4 md:py-6"
     >
       <div className="max-w-7xl mx-auto px-3 sm:px-6 md:px-12 flex items-center justify-between gap-2 md:gap-4">
-        {/* Logo (Hidden below laptop size to allow the horizontal nav pill to fit) */}
-        <button
-          onClick={() => handleNavClick("home")}
-          className="hidden lg:flex items-center gap-1.5 font-heading text-xl md:text-2xl font-bold tracking-wider cursor-pointer group"
-        >
-          <span className={`transition-colors duration-300 ${scrolled ? "text-[#f8fafc] group-hover:text-[#00d2ff]" : "text-[#050505] group-hover:text-[#00d2ff]"}`}>VIVEK</span>
-          <span className={`transition-colors duration-300 ${scrolled ? "text-[#00d2ff] group-hover:text-white" : "text-[#00d2ff] group-hover:text-black"}`}>RAUTELA</span>
-        </button>
+        {/* Spacer on the left to center the nav items when the logo is removed */}
+        <div className="hidden md:block w-32" />
 
         {/* Floating Nav Pill Items (Visible on Mobile & Desktop) */}
-        <nav className={`flex flex-nowrap items-center gap-0.5 sm:gap-1.5 backdrop-blur-md rounded-full p-1 transition-all duration-300 ${
+        <nav className={`flex flex-nowrap items-center gap-0.5 sm:gap-1.5 backdrop-blur-md rounded-full p-1.5 transition-all duration-300 shadow-md ${
           scrolled
-            ? "bg-white/[0.03] border border-white/[0.08]"
+            ? "bg-[#0b0c10]/85 border border-white/[0.08] shadow-lg"
             : "bg-black/[0.03] border border-black/[0.08]"
         }`}>
           {NAV_ITEMS.map((item) => (
@@ -101,18 +91,14 @@ export default function Navbar() {
           ))}
         </nav>
 
-        {/* Action button ("Let's Talk") */}
-        <div className="block">
+        {/* Action button ("Let's Talk") - Hidden on Mobile */}
+        <div className="hidden md:block w-32 text-right">
           <button
             onClick={() => handleNavClick("contact")}
-            className={`px-3 py-1.5 sm:px-5 sm:py-2.5 rounded-full text-[10px] sm:text-xs md:text-sm font-bold tracking-wide flex items-center gap-1 cursor-pointer transition-all duration-300 whitespace-nowrap ${
-              scrolled
-                ? "glass-btn"
-                : "border border-black text-black hover:bg-black hover:text-white"
-            }`}
+            className="px-5 py-2 rounded-full text-sm font-bold tracking-wide inline-flex items-center gap-1.5 cursor-pointer transition-all duration-300 whitespace-nowrap border border-black text-black hover:bg-black hover:text-white"
           >
             Let's Talk
-            <ArrowUpRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+            <ArrowUpRight className="w-4 h-4" />
           </button>
         </div>
       </div>

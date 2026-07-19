@@ -79,13 +79,28 @@ export default function Hero() {
         }`}
       />
 
-      {/* Cinematic Background Video */}
+      {/* Cinematic Background Videos (Responsive) */}
+      {/* Mobile background video */}
       <motion.video
         autoPlay
         muted
         loop
         playsInline
-        className="absolute inset-0 w-full h-full object-cover object-right md:object-center transition-all duration-1000 select-none pointer-events-none scale-[1.35] md:scale-105 opacity-100"
+        className="absolute inset-0 w-full h-full object-cover object-center transition-all duration-1000 select-none pointer-events-none opacity-100 md:hidden"
+      >
+        <source
+          src="https://res.cloudinary.com/qia3rzqk/video/upload/v1784439049/1000044059_gwr_video_mvp_wllvul.mp4"
+          type="video/mp4"
+        />
+      </motion.video>
+
+      {/* Desktop/Laptop background video */}
+      <motion.video
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover object-center transition-all duration-1000 select-none pointer-events-none scale-105 opacity-100 hidden md:block"
       >
         <source
           src="https://res.cloudinary.com/qia3rzqk/video/upload/v1784386883/watermark-removed-dont_add_text_last_202607181153_y37s5u.mp4"

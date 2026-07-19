@@ -69,9 +69,30 @@ export default function Hero() {
       }
     };
 
+    const handleResume = (e: Event) => {
+      const video = e.target as HTMLVideoElement;
+      if (video && video.paused) {
+        video.play().catch(() => {});
+      }
+    };
+
+    const mobileEl = mobileVideoRef.current;
+    const desktopEl = desktopVideoRef.current;
+
     // Attempt autoplay immediately
-    playVideo(mobileVideoRef.current);
-    playVideo(desktopVideoRef.current);
+    playVideo(mobileEl);
+    playVideo(desktopEl);
+
+    // Auto resume if paused by browser automatically
+    if (mobileEl) mobileEl.addEventListener("pause", handleResume);
+    if (desktopEl) desktopEl.addEventListener("pause", handleResume);
+
+    // Trigger on scroll to ensure it plays while scrolling
+    const handleScrollPlay = () => {
+      if (mobileEl && mobileEl.paused) mobileEl.play().catch(() => {});
+      if (desktopEl && desktopEl.paused) desktopEl.play().catch(() => {});
+    };
+    window.addEventListener("scroll", handleScrollPlay, { passive: true });
 
     // Try again on user's first interaction if autoplay got blocked by strict mobile policies
     const resumePlayback = () => {
@@ -86,6 +107,9 @@ export default function Hero() {
     window.addEventListener("click", resumePlayback, { passive: true });
 
     return () => {
+      if (mobileEl) mobileEl.removeEventListener("pause", handleResume);
+      if (desktopEl) desktopEl.removeEventListener("pause", handleResume);
+      window.removeEventListener("scroll", handleScrollPlay);
       window.removeEventListener("touchstart", resumePlayback);
       window.removeEventListener("click", resumePlayback);
     };
@@ -110,7 +134,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative w-full h-screen flex items-center justify-start overflow-hidden bg-[#050505] z-10"
+      className="relative w-full min-h-[100svh] flex items-center justify-start overflow-hidden bg-[#050505] z-10"
     >
       {/* Fallback visual gradient before video loads */}
       <div
@@ -121,34 +145,60 @@ export default function Hero() {
 
       {/* Cinematic Background Videos (Responsive) */}
       {/* Mobile background video */}
-      <motion.video
+      <video
         ref={mobileVideoRef}
         autoPlay
         muted
         loop
         playsInline
+        preload="auto"
         className="absolute inset-0 w-full h-full object-cover object-center transition-all duration-1000 select-none pointer-events-none opacity-100 md:hidden"
+        style={{
+          objectFit: "cover",
+          width: "100%",
+          height: "100%",
+          position: "absolute",
+          inset: 0,
+        }}
       >
         <source
-          src="https://res.cloudinary.com/qia3rzqk/video/upload/v1784439049/1000044059_gwr_video_mvp_wllvul.mp4"
+          src="https://res.cloudinary.com/qia3rzqk/video/upload/w_720,c_scale,vc_h264/v1784439049/1000044059_gwr_video_mvp_wllvul.mp4"
+          type="video/mp4"
+          media="(min-width: 480px)"
+        />
+        <source
+          src="https://res.cloudinary.com/qia3rzqk/video/upload/w_480,c_scale,vc_h264/v1784439049/1000044059_gwr_video_mvp_wllvul.mp4"
           type="video/mp4"
         />
-      </motion.video>
+      </video>
 
       {/* Desktop/Laptop background video */}
-      <motion.video
+      <video
         ref={desktopVideoRef}
         autoPlay
         muted
         loop
         playsInline
+        preload="auto"
         className="absolute inset-0 w-full h-full object-cover object-center transition-all duration-1000 select-none pointer-events-none scale-105 opacity-100 hidden md:block"
+        style={{
+          objectFit: "cover",
+          width: "100%",
+          height: "100%",
+          position: "absolute",
+          inset: 0,
+        }}
       >
         <source
-          src="https://res.cloudinary.com/qia3rzqk/video/upload/v1784386883/watermark-removed-dont_add_text_last_202607181153_y37s5u.mp4"
+          src="https://res.cloudinary.com/qia3rzqk/video/upload/w_1920,c_scale,vc_h264/v1784386883/watermark-removed-dont_add_text_last_202607181153_y37s5u.mp4"
+          type="video/mp4"
+          media="(min-width: 1200px)"
+        />
+        <source
+          src="https://res.cloudinary.com/qia3rzqk/video/upload/w_1280,c_scale,vc_h264/v1784386883/watermark-removed-dont_add_text_last_202607181153_y37s5u.mp4"
           type="video/mp4"
         />
-      </motion.video>
+      </video>
 
       {/* Left-aligned Hero Content Wrapper */}
       <div className="z-10 w-full max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-start h-full pt-20">

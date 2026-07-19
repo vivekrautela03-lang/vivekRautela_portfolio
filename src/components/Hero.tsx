@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Mail, ArrowDown } from "lucide-react";
 
@@ -43,12 +43,52 @@ const SOCIAL_LINKS = [
 export default function Hero() {
   const [roleIndex, setRoleIndex] = useState(0);
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+  const mobileVideoRef = useRef<HTMLVideoElement>(null);
+  const desktopVideoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setRoleIndex((prev) => (prev + 1) % ROLES.length);
     }, 2800);
     return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    // Explicitly set muted=true and call play() programmatically on mobile/Safari
+    const playVideo = (videoEl: HTMLVideoElement | null) => {
+      if (videoEl) {
+        videoEl.muted = true;
+        videoEl.setAttribute("muted", "");
+        videoEl.play()
+          .then(() => {
+            setIsVideoLoaded(true);
+          })
+          .catch((err) => {
+            console.warn("Video autoplay blocked by browser policy:", err);
+          });
+      }
+    };
+
+    // Attempt autoplay immediately
+    playVideo(mobileVideoRef.current);
+    playVideo(desktopVideoRef.current);
+
+    // Try again on user's first interaction if autoplay got blocked by strict mobile policies
+    const resumePlayback = () => {
+      playVideo(mobileVideoRef.current);
+      playVideo(desktopVideoRef.current);
+      // Remove listeners once playback starts
+      window.removeEventListener("touchstart", resumePlayback);
+      window.removeEventListener("click", resumePlayback);
+    };
+
+    window.addEventListener("touchstart", resumePlayback, { passive: true });
+    window.addEventListener("click", resumePlayback, { passive: true });
+
+    return () => {
+      window.removeEventListener("touchstart", resumePlayback);
+      window.removeEventListener("click", resumePlayback);
+    };
   }, []);
 
   const handleScrollTo = (id: string) => {
@@ -82,6 +122,7 @@ export default function Hero() {
       {/* Cinematic Background Videos (Responsive) */}
       {/* Mobile background video */}
       <motion.video
+        ref={mobileVideoRef}
         autoPlay
         muted
         loop
@@ -96,6 +137,7 @@ export default function Hero() {
 
       {/* Desktop/Laptop background video */}
       <motion.video
+        ref={desktopVideoRef}
         autoPlay
         muted
         loop

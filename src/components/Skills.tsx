@@ -88,8 +88,8 @@ export default function Skills() {
           <div className="w-12 h-1 bg-[#0070f3] mt-4 rounded-full mx-auto md:mx-0" />
         </div>
 
-        {/* Skills Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Skills Cards Grid / Horizontal Scroll on Mobile */}
+        <div className="flex flex-row overflow-x-auto snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] gap-5 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-8 pb-6 md:pb-0">
           {SKILL_CATEGORIES.map((category, idx) => (
             <motion.div
               key={idx}
@@ -97,45 +97,58 @@ export default function Skills() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-30px" }}
               transition={{ delay: idx * 0.15, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="h-full"
+              className="w-[82vw] sm:w-[350px] shrink-0 snap-center md:w-auto md:shrink h-full"
             >
               <div 
-                className="relative rounded-[24px] p-6 md:p-8 overflow-hidden group cursor-pointer h-full transition-all duration-500 ease-out hover:-translate-y-2 hover:scale-[1.02] hover:border-black/15 hover:border-t-black/25 hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.1),_0_0_20px_rgba(0,112,243,0.06)] flex flex-col"
-                style={{
-                  background: "rgba(255, 255, 255, 0.45)",
-                  backdropFilter: "blur(20px)",
-                  WebkitBackdropFilter: "blur(20px)",
-                  border: "1px solid rgba(0, 0, 0, 0.05)",
-                  borderTop: "1px solid rgba(0, 0, 0, 0.1)",
-                  boxShadow: "0 10px 30px -10px rgba(0, 0, 0, 0.04)",
-                }}
+                className="relative rounded-[28px] overflow-hidden group cursor-pointer h-full transition-all duration-[0.65s] ease-out hover:-translate-y-2 hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.08)] border border-black/[0.05] bg-white/45 backdrop-blur-md flex flex-col"
               >
-                {/* Subtle top glossy overlay */}
-                <div className="absolute inset-0 bg-gradient-to-b from-white/[0.2] to-transparent pointer-events-none" />
-
-                {/* Card Content */}
-                <div className="relative z-10 flex flex-col h-full">
-                  {/* Header */}
-                  <div className="flex items-center gap-4 mb-6">
-                    <div className="p-3 rounded-2xl bg-black/[0.02] border border-black/[0.05] text-black/60 group-hover:text-black transition-all duration-300">
-                      <category.icon className="w-5 h-5 transition-transform duration-500 group-hover:scale-110" />
+                {/* Header (card__header) */}
+                <div className="relative h-28 w-full overflow-hidden bg-gradient-to-tr from-[#0070f3]/10 to-[#7928ca]/10 border-b border-black/[0.04]">
+                  {/* Panning gradient background overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#0070f3]/5 to-[#7928ca]/5 opacity-60 group-hover:scale-110 group-hover:blur-md transition-all duration-[0.65s] ease-out" />
+                  
+                  {/* Profile Figure (card__profile) */}
+                  <div className="absolute -bottom-7 left-6 md:left-8">
+                    <div className="relative w-14 h-14 rounded-full border-[3px] border-white bg-white shadow-md flex items-center justify-center overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-tr from-[#0070f3]/10 to-[#7928ca]/10 opacity-30" />
+                      <category.icon className="relative z-10 w-6 h-6 text-[#0070f3] transition-all duration-[0.65s] ease-out group-hover:scale-125 group-hover:rotate-6" />
                     </div>
-                    <h3 className="font-heading font-bold text-lg md:text-xl text-[#050505] group-hover:translate-x-1 transition-transform duration-300">
-                      {category.title}
-                    </h3>
                   </div>
+                </div>
 
-                  {/* Skill Pills */}
-                  <div className="flex flex-wrap gap-3 mt-auto">
+                {/* Body (card__body) */}
+                <div className="p-6 md:p-8 pt-9 flex flex-col flex-grow">
+                  {/* Title (card__name) */}
+                  <h3 className="font-heading font-extrabold text-lg md:text-xl text-[#050505] mb-1 group-hover:text-[#0070f3] transition-colors duration-300">
+                    {category.title}
+                  </h3>
+                  
+                  {/* Subtitle (card__job) */}
+                  <p className="text-[9px] uppercase font-bold tracking-wider text-slate-400 mb-4">
+                    Arsenal & Capabilities
+                  </p>
+
+                  {/* Skills (card__bio / skills list) */}
+                  <div className="flex flex-wrap gap-2.5 mt-auto pt-2">
                     {category.skills.map((skill, sIdx) => (
                       <span
                         key={sIdx}
-                        className="text-xs px-4 py-2 rounded-full bg-black/[0.02] border border-black/[0.04] text-slate-700 font-semibold transition-colors duration-300 hover:text-black hover:bg-black/[0.06] hover:border-black/[0.1]"
+                        className="text-[10px] px-3 py-1.5 rounded-full bg-black/[0.02] border border-black/[0.04] text-slate-700 font-semibold transition-all duration-300 hover:text-white hover:bg-black hover:border-black"
                       >
                         {skill}
                       </span>
                     ))}
                   </div>
+                </div>
+
+                {/* Footer (card__footer) */}
+                <div className="px-6 py-4 md:px-8 border-t border-black/[0.03] bg-black/[0.01] flex items-center justify-between">
+                  <p className="text-[9px] uppercase tracking-wider font-bold text-slate-400">
+                    {category.skills.length} core tags
+                  </p>
+                  <p className="text-[9px] font-bold text-[#0070f3] group-hover:translate-x-1 transition-transform duration-300">
+                    Explore &rarr;
+                  </p>
                 </div>
               </div>
             </motion.div>

@@ -290,34 +290,34 @@ export default function Hero() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.8 }}
-            className="flex flex-col gap-4 w-full sm:w-auto"
+            className="w-full sm:w-auto"
           >
-            <div className="flex flex-row items-center gap-3 w-full sm:w-auto">
+            <div className="flex flex-row items-center flex-wrap gap-2.5 sm:gap-4 w-full sm:w-auto">
               <button
                 onClick={() => handleScrollTo("projects")}
-                className="flex-1 sm:flex-none bg-[#050505] text-white border border-[#050505] hover:bg-slate-800 hover:border-slate-800 px-4 py-3 sm:px-8 sm:py-3.5 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider text-center cursor-pointer transition-all duration-300 shadow-md whitespace-nowrap"
+                className="bg-[#050505] text-white border border-[#050505] hover:bg-slate-800 hover:border-slate-800 px-3.5 py-2.5 sm:px-8 sm:py-3.5 rounded-full text-[9px] sm:text-xs font-bold uppercase tracking-wider text-center cursor-pointer transition-all duration-300 shadow-md whitespace-nowrap"
               >
                 View Projects
               </button>
               <button
                 onClick={() => handleScrollTo("about")}
-                className="flex-1 sm:flex-none border border-[#050505] text-[#050505] hover:bg-[#050505]/10 px-4 py-3 sm:px-8 sm:py-3.5 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider text-center cursor-pointer transition-all duration-300 whitespace-nowrap"
+                className="border border-[#050505] text-[#050505] hover:bg-[#050505]/10 px-3.5 py-2.5 sm:px-8 sm:py-3.5 rounded-full text-[9px] sm:text-xs font-bold uppercase tracking-wider text-center cursor-pointer transition-all duration-300 whitespace-nowrap"
               >
                 Download Resume
               </button>
+              <button
+                onClick={() => handleScrollTo("contact")}
+                className="px-3 py-2.5 sm:px-6 sm:py-3.5 text-[9px] sm:text-xs font-bold uppercase tracking-wider text-slate-700 hover:text-black hover:underline transition-colors text-center cursor-pointer flex items-center justify-center gap-1 whitespace-nowrap"
+              >
+                Contact Me
+              </button>
             </div>
-            <button
-              onClick={() => handleScrollTo("contact")}
-              className="px-4 py-2 text-[10px] sm:text-xs font-bold uppercase tracking-wider text-slate-700 hover:text-black hover:underline transition-colors text-left sm:text-center cursor-pointer flex items-center justify-start sm:justify-center gap-1"
-            >
-              Contact Me
-            </button>
           </motion.div>
         </motion.div>
       </div>
 
       {/* Social Icons Bottom-Left */}
-      <div className="absolute bottom-8 left-6 md:left-12 z-20 hidden md:flex items-center gap-5">
+      <div className="absolute bottom-8 left-6 md:left-12 z-20 flex items-center gap-4 sm:gap-5">
         {SOCIAL_LINKS.map((social, idx) => (
           <motion.a
             key={idx}

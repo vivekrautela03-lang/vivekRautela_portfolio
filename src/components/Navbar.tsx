@@ -59,7 +59,7 @@ export default function Navbar() {
     <header
       className="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-transparent py-4 md:py-6"
     >
-      <div className="max-w-7xl mx-auto px-3 sm:px-6 md:px-12 flex items-center justify-between gap-2 md:gap-4">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 md:px-12 flex items-center justify-center md:justify-between gap-2 md:gap-4">
         {/* Spacer on the left to center the nav items when the logo is removed */}
         <div className="hidden md:block w-32" />
 

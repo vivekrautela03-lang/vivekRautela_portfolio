@@ -18,12 +18,12 @@ export default function Testimonials() {
   };
 
   return (
-    <section id="testimonials" className="relative py-24 md:py-32 bg-[#ffffff] text-[#050505] z-10 overflow-hidden">
+    <section id="testimonials" className="relative py-24 md:py-32 bg-[#050505] text-[#f8fafc] z-10 overflow-hidden">
       
       {/* Floating Neon Color Orbs Behind the Carousel for Glassmorphic Blur Effect */}
-      <div className="absolute top-[20%] left-[10%] w-[250px] h-[250px] rounded-full bg-[#ff0055]/30 filter blur-[90px] animate-pulse pointer-events-none" />
-      <div className="absolute bottom-[20%] right-[10%] w-[300px] h-[300px] rounded-full bg-[#ff00aa]/20 filter blur-[110px] animate-pulse pointer-events-none" />
-      <div className="absolute top-[50%] left-[45%] w-[200px] h-[200px] rounded-full bg-[#7928ca]/25 filter blur-[80px] pointer-events-none" />
+      <div className="absolute top-[20%] left-[10%] w-[300px] h-[300px] rounded-full bg-[#ff0055]/35 filter blur-[100px] animate-pulse pointer-events-none" />
+      <div className="absolute bottom-[20%] right-[10%] w-[350px] h-[350px] rounded-full bg-[#ff00aa]/25 filter blur-[120px] animate-pulse pointer-events-none" />
+      <div className="absolute top-[50%] left-[45%] w-[250px] h-[250px] rounded-full bg-[#7928ca]/30 filter blur-[95px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
         
@@ -34,7 +34,7 @@ export default function Testimonials() {
             whileInView={{ opacity: 0.6, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-xs uppercase font-bold tracking-[0.25em] text-[#0070f3]"
+            className="text-xs uppercase font-bold tracking-[0.25em] text-[#00d2ff]"
           >
             Creative Frames
           </motion.span>
@@ -43,11 +43,11 @@ export default function Testimonials() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1, duration: 0.6 }}
-            className="text-3xl md:text-5xl font-heading font-extrabold text-slate-950 mt-2"
+            className="text-3xl md:text-5xl font-heading font-extrabold text-white mt-2"
           >
             Glassmorphic Feed
           </motion.h2>
-          <div className="w-12 h-1 bg-[#0070f3] mt-4 rounded-full mx-auto" />
+          <div className="w-12 h-1 bg-[#00d2ff] mt-4 rounded-full mx-auto" />
         </div>
 
         {/* Carousel Slider Wrapper */}
@@ -56,18 +56,18 @@ export default function Testimonials() {
           {/* Navigation Controls (Desktop only) */}
           <button
             onClick={() => scroll("left")}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-25 p-3 rounded-full bg-white/80 border border-black/5 shadow-md hover:bg-white hover:scale-105 transition-all opacity-0 group-hover:opacity-100 hidden md:flex items-center justify-center cursor-pointer"
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-25 p-3 rounded-full bg-white/10 border border-white/10 backdrop-blur-md shadow-lg hover:bg-white/20 hover:scale-105 transition-all opacity-0 group-hover:opacity-100 hidden md:flex items-center justify-center cursor-pointer"
             aria-label="Scroll left"
           >
-            <ChevronLeft className="w-5 h-5 text-slate-700" />
+            <ChevronLeft className="w-5 h-5 text-white" />
           </button>
           
           <button
             onClick={() => scroll("right")}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-25 p-3 rounded-full bg-white/80 border border-black/5 shadow-md hover:bg-white hover:scale-105 transition-all opacity-0 group-hover:opacity-100 hidden md:flex items-center justify-center cursor-pointer"
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-25 p-3 rounded-full bg-white/10 border border-white/10 backdrop-blur-md shadow-lg hover:bg-white/20 hover:scale-105 transition-all opacity-0 group-hover:opacity-100 hidden md:flex items-center justify-center cursor-pointer"
             aria-label="Scroll right"
           >
-            <ChevronRight className="w-5 h-5 text-slate-700" />
+            <ChevronRight className="w-5 h-5 text-white" />
           </button>
 
           {/* Swipe Container */}
@@ -84,11 +84,11 @@ export default function Testimonials() {
                 transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                 className="w-[290px] md:w-[330px] shrink-0 snap-center"
               >
-                {/* Premium Dark Glassmorphic Instagram Post Card */}
+                {/* Premium Transparent Glassmorphic Instagram Post Card */}
                 <div 
-                  className="rounded-[28px] border border-white/10 bg-slate-950/90 p-4 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.5)] flex flex-col relative overflow-hidden backdrop-blur-xl transition-all duration-300 hover:scale-[1.01]"
+                  className="rounded-[28px] border border-white/10 bg-white/[0.03] p-4 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.5)] flex flex-col relative overflow-hidden backdrop-blur-xl transition-all duration-300 hover:scale-[1.01]"
                   style={{
-                    boxShadow: "0 25px 65px -15px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.1)",
+                    boxShadow: "0 25px 65px -15px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.08)",
                   }}
                 >
                   {/* Subtle top glare glow */}

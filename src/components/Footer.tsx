@@ -36,11 +36,30 @@ const BehanceSocialIcon = ({ className }: { className?: string }) => (
 const MailSocialIcon = ({ className }: { className?: string }) => <Mail className={className || "w-4 h-4"} />;
 
 const SOCIAL_LINKS = [
-  { icon: GithubSocialIcon, href: "https://github.com", label: "GitHub" },
-  { icon: LinkedinSocialIcon, href: "https://linkedin.com", label: "LinkedIn" },
-  { icon: InstagramSocialIcon, href: "https://instagram.com", label: "Instagram" },
-  { icon: BehanceSocialIcon, href: "https://behance.net", label: "Behance" },
-  { icon: MailSocialIcon, href: "mailto:hello@vivekrautela.com", label: "Email" },
+  { 
+    icon: GithubSocialIcon, 
+    href: "https://github.com/vivekrautela03-lang", 
+    label: "GitHub",
+    hoverClass: "hover:bg-[#181717] hover:text-white hover:border-[#181717]" 
+  },
+  { 
+    icon: LinkedinSocialIcon, 
+    href: "https://www.linkedin.com/in/vivek-rautela-1a8194381?utm_source=share_via&utm_content=profile&utm_medium=member_android", 
+    label: "LinkedIn",
+    hoverClass: "hover:bg-[#0a66c2] hover:text-white hover:border-[#0a66c2]" 
+  },
+  { 
+    icon: InstagramSocialIcon, 
+    href: "https://instagram.com/psf_vivek", 
+    label: "Instagram",
+    hoverClass: "hover:bg-[#e1306c] hover:text-white hover:border-[#e1306c]" 
+  },
+  { 
+    icon: MailSocialIcon, 
+    href: "mailto:vivekrautela03@gmail.com", 
+    label: "Email",
+    hoverClass: "hover:bg-[#ea4335] hover:text-white hover:border-[#ea4335]" 
+  },
 ];
 
 export default function Footer() {
@@ -131,7 +150,7 @@ export default function Footer() {
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-slate-600 hover:text-white p-2.5 bg-black/[0.02] border border-black/[0.04] rounded-full hover:bg-black hover:border-black transition-all cursor-pointer flex items-center justify-center"
+                className={`text-slate-600 p-2.5 bg-black/[0.02] border border-black/[0.04] rounded-full transition-all cursor-pointer flex items-center justify-center ${social.hoverClass}`}
                 aria-label={social.label}
               >
                 <social.icon className="w-4 h-4" />

@@ -34,10 +34,30 @@ const ROLES = [
 ];
 
 const SOCIAL_LINKS = [
-  { icon: GithubIcon, href: "https://github.com", label: "GitHub" },
-  { icon: LinkedinIcon, href: "https://linkedin.com", label: "LinkedIn" },
-  { icon: InstagramIcon, href: "https://instagram.com", label: "Instagram" },
-  { icon: Mail, href: "mailto:hello@vivekrautela.com", label: "Email" },
+  { 
+    icon: GithubIcon, 
+    href: "https://github.com/vivekrautela03-lang", 
+    label: "GitHub",
+    hoverClass: "hover:bg-[#181717] hover:text-white hover:border-[#181717]" 
+  },
+  { 
+    icon: LinkedinIcon, 
+    href: "https://www.linkedin.com/in/vivek-rautela-1a8194381?utm_source=share_via&utm_content=profile&utm_medium=member_android", 
+    label: "LinkedIn",
+    hoverClass: "hover:bg-[#0a66c2] hover:text-white hover:border-[#0a66c2]" 
+  },
+  { 
+    icon: InstagramIcon, 
+    href: "https://instagram.com/psf_vivek", 
+    label: "Instagram",
+    hoverClass: "hover:bg-[#e1306c] hover:text-white hover:border-[#e1306c]" 
+  },
+  { 
+    icon: Mail, 
+    href: "mailto:vivekrautela03@gmail.com", 
+    label: "Email",
+    hoverClass: "hover:bg-[#ea4335] hover:text-white hover:border-[#ea4335]" 
+  },
 ];
 
 export default function Hero() {
@@ -308,7 +328,7 @@ export default function Hero() {
             animate={{ opacity: 0.7, x: 0 }}
             whileHover={{ opacity: 1, scale: 1.15, y: -2 }}
             transition={{ type: "spring", stiffness: 400, damping: 15 }}
-            className="text-[#050505] p-2 bg-[#050505]/5 border border-[#050505]/10 rounded-full hover:bg-[#050505] hover:text-white hover:border-[#050505] transition-all cursor-pointer"
+            className={`text-[#050505] p-2 bg-[#050505]/5 border border-[#050505]/10 rounded-full transition-all cursor-pointer ${social.hoverClass}`}
             aria-label={social.label}
           >
             <social.icon className="w-4 h-4" />

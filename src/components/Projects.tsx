@@ -50,6 +50,26 @@ const PROJECTS = [
       "🚀 Ultra-Fast Server Renderings"
     ],
     technologies: ["Next.js", "Tailwind CSS", "GSAP", "Framer Motion", "Vercel"]
+  },
+  {
+    title: "Nirmala Sweets",
+    category: "Food & E-Commerce",
+    subtitle: "Premium Mithai & Catering Platform",
+    description: "A modern e-commerce experience designed for one of Dehradun's trusted sweet brands. The platform combines elegant storytelling, premium product presentation, online ordering, festive promotions, and catering services into a fast, responsive shopping experience inspired by luxury Indian confectionery brands.",
+    image: "/images/nirmala_sweets.png",
+    demoLink: "https://mithai-premium-19.preview.emergentagent.com/?utm_source=share",
+    githubLink: "https://github.com/vivekrautela03-lang",
+    highlights: [
+      "🛒 Online Sweet Ordering",
+      "🎉 Festival & Seasonal Offers",
+      "🍰 Premium Product Showcase",
+      "🚚 Fast Delivery Experience",
+      "🍽️ Catering Booking System",
+      "📱 Fully Responsive Design",
+      "✨ Modern Luxury UI",
+      "⚡ Optimized Performance"
+    ],
+    technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion"]
   }
 ];
 
@@ -86,14 +106,14 @@ export default function Projects() {
             whileInView={{ opacity: 0.8, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2, duration: 0.6 }}
-            className="text-slate-650 text-sm md:text-base max-w-md leading-relaxed font-normal"
+            className="text-slate-655 text-sm md:text-base max-w-md leading-relaxed font-normal"
           >
-            A curated showcase of interactive digital platforms built for film production, workflow orchestration, and creative studios.
+            A curated showcase of interactive digital platforms built for film production, workflow orchestration, gourmet confectionery, and e-commerce.
           </motion.p>
         </div>
 
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-14">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {PROJECTS.map((project, idx) => (
             <motion.div
               key={idx}
@@ -101,7 +121,7 @@ export default function Projects() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-30px" }}
               transition={{ delay: idx * 0.15, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="relative rounded-[36px] overflow-hidden border border-black/5 bg-white/45 backdrop-blur-md shadow-lg p-6 md:p-8 hover:shadow-xl transition-all duration-500 group flex flex-col justify-between h-full"
+              className="relative rounded-[36px] overflow-hidden border border-black/5 bg-white/45 backdrop-blur-md shadow-lg p-6 flex flex-col justify-between h-full hover:shadow-xl transition-all duration-500 group"
             >
               {/* Subtle reflection overlay */}
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out pointer-events-none z-20" />
@@ -113,7 +133,7 @@ export default function Projects() {
                     src={project.image}
                     alt={project.title}
                     fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 550px"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 380px"
                     className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
                     priority={idx === 0}
                   />
@@ -125,7 +145,7 @@ export default function Projects() {
                 </div>
 
                 {/* Project Titles */}
-                <h3 className="font-heading font-black text-2xl text-slate-900 mb-1 group-hover:text-[#0070f3] transition-colors duration-300">
+                <h3 className="font-heading font-black text-xl text-slate-900 mb-1 group-hover:text-[#0070f3] transition-colors duration-300">
                   {project.title}
                 </h3>
                 
@@ -139,13 +159,18 @@ export default function Projects() {
                 </p>
 
                 {/* Highlights Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-6">
-                  {project.highlights.map((hl, hlIdx) => (
+                <div className="grid grid-cols-1 gap-2 mb-6">
+                  {project.highlights.slice(0, 6).map((hl, hlIdx) => (
                     <div key={hlIdx} className="flex items-center gap-2 text-[10px] sm:text-xs text-slate-700 font-semibold">
                       <span className="flex-shrink-0">{hl.split(" ")[0]}</span>
                       <span>{hl.substring(hl.indexOf(" ") + 1)}</span>
                     </div>
                   ))}
+                  {project.highlights.length > 6 && (
+                    <div className="text-[9px] text-slate-400 font-bold uppercase tracking-wider pl-6 mt-1">
+                      + {project.highlights.length - 6} more capabilities
+                    </div>
+                  )}
                 </div>
 
                 {/* Tech Pills */}
@@ -162,7 +187,7 @@ export default function Projects() {
               </div>
 
               {/* Action Buttons Row */}
-              <div className="flex items-center gap-6 border-t border-black/[0.06] pt-6 mt-auto">
+              <div className="flex items-center justify-between border-t border-black/[0.06] pt-6 mt-auto">
                 <a
                   href={project.githubLink}
                   target="_blank"

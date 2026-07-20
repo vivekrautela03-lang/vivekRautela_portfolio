@@ -11,25 +11,46 @@ const GithubIcon = () => (
   </svg>
 );
 
-const HIGHLIGHTS = [
-  "🤖 AI Production Assistant",
-  "🎬 Storyboarding & Script Workspace",
-  "👥 Crew & Project Collaboration",
-  "💬 Real-Time Messaging",
-  "📁 Asset & File Management",
-  "📅 Production Scheduling",
-  "🔔 Live Notifications",
-  "🔐 Secure Authentication",
-  "📱 Responsive Glassmorphism UI"
-];
-
-const TECHNOLOGIES = [
-  "Next.js",
-  "React",
-  "TypeScript",
-  "Supabase",
-  "Tailwind CSS",
-  "Framer Motion"
+const PROJECTS = [
+  {
+    title: "TOV Studio",
+    category: "Filmmaking OS",
+    subtitle: "The Operating System for Modern Filmmaking",
+    description: "From concept to final delivery, TOV Studio streamlines every stage of production with AI-powered planning, collaborative workspaces, intelligent project management, crew coordination, and cinematic workflow automation—helping creative teams build faster, collaborate smarter, and produce exceptional stories.",
+    image: "/images/tov_studio.png",
+    demoLink: "https://tov-studio.vercel.app",
+    githubLink: "https://github.com/vivekrautela03-lang/Tov_studio",
+    highlights: [
+      "🤖 AI Production Assistant",
+      "🎬 Storyboarding & Script Workspace",
+      "👥 Crew & Project Collaboration",
+      "💬 Real-Time Messaging",
+      "📁 Asset & File Management",
+      "📅 Production Scheduling",
+      "🔔 Live Notifications",
+      "🔐 Secure Authentication",
+      "📱 Responsive Glassmorphic UI"
+    ],
+    technologies: ["Next.js", "React", "TypeScript", "Supabase", "Tailwind CSS", "Framer Motion"]
+  },
+  {
+    title: "TheOldverse Website",
+    category: "Creative Studio",
+    subtitle: "TheOldverse – Production House Website",
+    description: "A cinematic glassmorphism website showcasing films, creative projects, founders, and interactive storytelling with immersive animations.",
+    image: "/images/theoldverse_web.png",
+    demoLink: "https://www.theoldverse-productions.in/",
+    githubLink: "https://github.com/vivekrautela03-lang/theoldverse_production",
+    highlights: [
+      "🎬 Film & Project Showcases",
+      "✨ Premium Glassmorphic Design",
+      "🌀 GSAP & ScrollTrigger Animations",
+      "👥 Founders & Team Spotlights",
+      "📱 Highly Responsive Layouts",
+      "🚀 Ultra-Fast Server Renderings"
+    ],
+    technologies: ["Next.js", "Tailwind CSS", "GSAP", "Framer Motion", "Vercel"]
+  }
 ];
 
 export default function Projects() {
@@ -38,7 +59,7 @@ export default function Projects() {
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         
         {/* Section Header */}
-        <div className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <div className="mb-20 flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div>
             <motion.span
               initial={{ opacity: 0, y: 15 }}
@@ -56,7 +77,7 @@ export default function Projects() {
               transition={{ delay: 0.1, duration: 0.6 }}
               className="text-3xl md:text-5xl font-heading font-extrabold text-slate-950 mt-2"
             >
-              Featured Project
+              Featured Projects
             </motion.h2>
             <div className="w-12 h-1 bg-[#0070f3] mt-4 rounded-full" />
           </div>
@@ -67,70 +88,71 @@ export default function Projects() {
             transition={{ delay: 0.2, duration: 0.6 }}
             className="text-slate-650 text-sm md:text-base max-w-md leading-relaxed font-normal"
           >
-            My main release—a modern digital workspace built to unify filmmaking workflows and creative management.
+            A curated showcase of interactive digital platforms built for film production, workflow orchestration, and creative studios.
           </motion.p>
         </div>
 
-        {/* Unified Large Card Showcase */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-30px" }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="relative rounded-[36px] overflow-hidden border border-black/5 bg-white/45 backdrop-blur-md shadow-lg p-6 md:p-10 hover:shadow-xl transition-all duration-500 group"
-        >
-          {/* Subtle reflection overlay */}
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out pointer-events-none z-20" />
-          
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
-            
-            {/* Left Column: Mockup Image */}
-            <div className="lg:col-span-6 relative aspect-[16/10] w-full rounded-2xl overflow-hidden border border-black/[0.06] shadow-sm bg-black/[0.01]">
-              <Image
-                src="/images/tov_studio.png"
-                alt="TOV Studio screenshot"
-                fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 550px"
-                className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-                priority
-              />
-              <div className="absolute top-4 left-4 z-10">
-                <span className="text-[9px] uppercase font-bold tracking-wider px-3.5 py-1.5 rounded-full bg-white/85 border border-black/10 backdrop-blur-md text-slate-700">
-                  Filmmaking OS
-                </span>
-              </div>
-            </div>
-
-            {/* Right Column: Details Content */}
-            <div className="lg:col-span-6 flex flex-col justify-between h-full text-left">
+        {/* Projects Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-14">
+          {PROJECTS.map((project, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-30px" }}
+              transition={{ delay: idx * 0.15, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="relative rounded-[36px] overflow-hidden border border-black/5 bg-white/45 backdrop-blur-md shadow-lg p-6 md:p-8 hover:shadow-xl transition-all duration-500 group flex flex-col justify-between h-full"
+            >
+              {/* Subtle reflection overlay */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out pointer-events-none z-20" />
+              
               <div>
-                <h3 className="font-heading font-black text-2xl md:text-3.5xl text-slate-900 mb-1 group-hover:text-[#0070f3] transition-colors duration-300">
-                  TOV Studio
+                {/* Mockup Image Container */}
+                <div className="relative aspect-[16/10] w-full rounded-2xl overflow-hidden border border-black/[0.06] shadow-sm bg-black/[0.01] mb-6">
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 550px"
+                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                    priority={idx === 0}
+                  />
+                  <div className="absolute top-4 left-4 z-10">
+                    <span className="text-[9px] uppercase font-bold tracking-wider px-3.5 py-1.5 rounded-full bg-white/85 border border-black/10 backdrop-blur-md text-slate-700">
+                      {project.category}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Project Titles */}
+                <h3 className="font-heading font-black text-2xl text-slate-900 mb-1 group-hover:text-[#0070f3] transition-colors duration-300">
+                  {project.title}
                 </h3>
                 
-                <p className="text-xs md:text-sm font-bold tracking-wide text-slate-500 uppercase mb-5">
-                  The Operating System for Modern Filmmaking
+                <p className="text-[10px] md:text-xs font-bold tracking-wide text-slate-500 uppercase mb-4">
+                  {project.subtitle}
                 </p>
                 
-                <p className="text-slate-600 text-xs md:text-sm leading-relaxed mb-6 font-normal">
-                  From concept to final delivery, TOV Studio streamlines every stage of production with AI-powered planning, collaborative workspaces, intelligent project management, crew coordination, and cinematic workflow automation—helping creative teams build faster, collaborate smarter, and produce exceptional stories.
+                {/* Description */}
+                <p className="text-slate-650 text-xs md:text-sm leading-relaxed mb-6 font-normal">
+                  {project.description}
                 </p>
 
                 {/* Highlights Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-6">
-                  {HIGHLIGHTS.map((hl, idx) => (
-                    <div key={idx} className="flex items-center gap-2 text-[10px] sm:text-xs text-slate-700 font-semibold">
+                  {project.highlights.map((hl, hlIdx) => (
+                    <div key={hlIdx} className="flex items-center gap-2 text-[10px] sm:text-xs text-slate-700 font-semibold">
                       <span className="flex-shrink-0">{hl.split(" ")[0]}</span>
                       <span>{hl.substring(hl.indexOf(" ") + 1)}</span>
                     </div>
                   ))}
                 </div>
 
-                {/* Tech Badges */}
+                {/* Tech Pills */}
                 <div className="flex flex-wrap gap-1.5 mb-8">
-                  {TECHNOLOGIES.map((tech, idx) => (
+                  {project.technologies.map((tech, techIdx) => (
                     <span
-                      key={idx}
+                      key={techIdx}
                       className="text-[10px] px-3 py-1 rounded-md bg-black/[0.02] border border-black/[0.04] text-slate-600 font-bold"
                     >
                       {tech}
@@ -142,7 +164,7 @@ export default function Projects() {
               {/* Action Buttons Row */}
               <div className="flex items-center gap-6 border-t border-black/[0.06] pt-6 mt-auto">
                 <a
-                  href="https://github.com/vivekrautela03-lang/Tov_studio"
+                  href={project.githubLink}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-1.5 text-xs text-slate-600 hover:text-black transition-colors duration-300 font-bold cursor-pointer"
@@ -152,7 +174,7 @@ export default function Projects() {
                 </a>
                 
                 <a
-                  href="https://tov-studio.vercel.app"
+                  href={project.demoLink}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-1 text-xs text-[#0070f3] hover:text-black transition-colors duration-300 font-bold group/link cursor-pointer"
@@ -161,10 +183,9 @@ export default function Projects() {
                   <ArrowUpRight className="w-4 h-4 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
                 </a>
               </div>
-            </div>
-
-          </div>
-        </motion.div>
+            </motion.div>
+          ))}
+        </div>
 
       </div>
     </section>

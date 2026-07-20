@@ -86,25 +86,28 @@ export default function Testimonials() {
               >
                 {/* Premium Transparent Glassmorphic Instagram Post Card */}
                 <div 
-                  className="rounded-[28px] border border-black/[0.06] bg-white/45 p-4 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.06)] flex flex-col relative overflow-hidden backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_25px_60px_-15px_rgba(0,0,0,0.1)]"
+                  className="rounded-[28px] border border-white/60 bg-white/20 p-4 shadow-[0_8px_32px_0_rgba(31,38,135,0.04)] flex flex-col relative overflow-hidden backdrop-blur-2xl transition-all duration-[0.5s] ease-out hover:-translate-y-1.5 hover:shadow-[0_20px_50px_-10px_rgba(0,0,0,0.08)] group"
                   style={{
-                    boxShadow: "0 20px 50px -15px rgba(0, 0, 0, 0.05), inset 0 1px 1px rgba(255, 255, 255, 0.6)",
+                    boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.04), inset 0 1px 1px rgba(255, 255, 255, 0.8)",
                   }}
                 >
+                  {/* Glowing color gradient overlay - fades in on hover/touch */}
+                  <div className="absolute inset-0 bg-gradient-to-tr from-[#ff0055]/5 via-[#7928ca]/3 to-[#0070f3]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                  
                   {/* Subtle top glare glow */}
-                  <div className="absolute inset-0 bg-gradient-to-b from-white/[0.4] to-transparent pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-b from-white/[0.6] to-transparent pointer-events-none" />
 
                   {/* 1. Header (User Info) */}
-                  <div className="flex items-center justify-between mb-3 select-none">
+                  <div className="relative z-10 flex items-center justify-between mb-3 select-none">
                     <div className="flex items-center gap-2.5">
                       {/* Avatar Placeholder */}
-                      <div className="w-8 h-8 rounded-full bg-black/[0.05] border border-black/[0.08] flex items-center justify-center text-slate-500">
+                      <div className="w-8 h-8 rounded-full bg-black/[0.04] border border-black/[0.06] flex items-center justify-center text-slate-500 group-hover:bg-gradient-to-tr group-hover:from-[#ff0055]/10 group-hover:to-[#0070f3]/10 transition-colors duration-300">
                         <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                           <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
                         </svg>
                       </div>
                       <div className="text-left">
-                        <p className="text-xs font-extrabold text-slate-900 tracking-wide">user_name</p>
+                        <p className="text-xs font-extrabold text-slate-900 tracking-wide group-hover:text-black transition-colors duration-300">user_name</p>
                         <p className="text-[9px] text-slate-400 font-semibold">Screen {num} of 14</p>
                       </div>
                     </div>
@@ -114,36 +117,36 @@ export default function Testimonials() {
                   </div>
 
                   {/* 2. Main Blank Glassmorphic Image Area */}
-                  <div className="relative aspect-square w-full rounded-xl border border-black/[0.05] bg-black/[0.02] backdrop-blur-md overflow-hidden flex items-center justify-center mb-4 select-none">
+                  <div className="relative aspect-square w-full rounded-xl border border-black/[0.04] bg-black/[0.01] backdrop-blur-md overflow-hidden flex items-center justify-center mb-4 select-none group-hover:bg-gradient-to-tr group-hover:from-[#ff0055]/5 group-hover:to-[#0070f3]/5 group-hover:border-[#ff0055]/10 transition-all duration-500">
                     {/* Inner glossy light shine */}
-                    <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.1] to-white/[0.2]" />
+                    <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.1] to-white/[0.3] group-hover:scale-105 transition-transform duration-500" />
                     
                     {/* Visual watermark indicating the empty screen */}
-                    <div className="text-center p-6 flex flex-col items-center">
-                      <div className="w-12 h-12 rounded-full border border-black/[0.06] bg-white flex items-center justify-center text-slate-400 shadow-sm mb-3 font-heading font-black text-sm">
+                    <div className="text-center p-6 flex flex-col items-center relative z-10">
+                      <div className="w-12 h-12 rounded-full border border-black/[0.05] bg-white flex items-center justify-center text-slate-400 shadow-sm mb-3 font-heading font-black text-sm group-hover:text-[#0070f3] group-hover:border-[#0070f3]/20 transition-all duration-500">
                         {num}
                       </div>
-                      <p className="text-[10px] tracking-wider uppercase font-bold text-slate-400">Frosted Glass Area</p>
+                      <p className="text-[10px] tracking-wider uppercase font-bold text-slate-450 group-hover:text-slate-500 transition-colors duration-500">Frosted Glass Area</p>
                     </div>
                   </div>
 
                   {/* 3. Footer (Actions & Engagement) */}
-                  <div className="flex flex-col text-left">
+                  <div className="relative z-10 flex flex-col text-left">
                     {/* Icons Bar */}
                     <div className="flex items-center justify-between mb-3">
-                      <div className="flex items-center gap-3.5 text-slate-600">
-                        <button className="hover:text-[#ff0055] transition-colors"><Heart className="w-4 h-4" /></button>
-                        <button className="hover:text-black transition-colors"><MessageCircle className="w-4 h-4" /></button>
-                        <button className="hover:text-[#0070f3] transition-colors"><Send className="w-4 h-4" /></button>
+                      <div className="flex items-center gap-3.5 text-slate-500">
+                        <button className="hover:text-[#ff0055] hover:scale-115 group-hover:text-[#ff0055] transition-all duration-300"><Heart className="w-4 h-4" /></button>
+                        <button className="hover:text-[#7928ca] hover:scale-115 group-hover:text-[#7928ca] transition-all duration-300"><MessageCircle className="w-4 h-4" /></button>
+                        <button className="hover:text-[#0070f3] hover:scale-115 group-hover:text-[#0070f3] transition-all duration-300"><Send className="w-4 h-4" /></button>
                       </div>
                       
                       {/* Dots Indicator */}
                       <div className="flex gap-1">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#0070f3]" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#0070f3] opacity-80" />
                         <span className="w-1.5 h-1.5 rounded-full bg-black/10" />
                       </div>
 
-                      <button className="text-slate-600 hover:text-black transition-colors">
+                      <button className="text-slate-500 hover:text-amber-500 hover:scale-115 group-hover:text-slate-700 transition-all duration-300">
                         <Bookmark className="w-4 h-4" />
                       </button>
                     </div>
@@ -151,13 +154,13 @@ export default function Testimonials() {
                     {/* Engagement text */}
                     <p className="text-[11px] font-extrabold text-slate-900 mb-1 select-none">482 likes</p>
                     
-                    <p className="text-[10px] text-slate-700 leading-relaxed font-normal mb-1">
+                    <p className="text-[10px] text-slate-750 leading-relaxed font-normal mb-1">
                       <span className="font-extrabold text-slate-900 mr-1.5">user_name</span>
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     </p>
                     
                     {/* Hashtags */}
-                    <p className="text-[9px] text-[#0070f3] font-bold mb-1.5">
+                    <p className="text-[9px] text-[#0070f3] font-bold mb-1.5 group-hover:text-[#ff0055] transition-colors duration-500">
                       #glassmorphism #carousel #blankcard
                     </p>
 

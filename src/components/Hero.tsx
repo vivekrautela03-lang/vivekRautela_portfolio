@@ -106,6 +106,18 @@ export default function Hero() {
       }
     };
 
+    const handleSeamlessLoop = (e: Event) => {
+      const video = e.target as HTMLVideoElement;
+      if (video && video.duration) {
+        // Intercept looping 0.25 seconds before completion to prevent browser seek lag
+        const buffer = 0.25;
+        if (video.currentTime > video.duration - buffer) {
+          video.currentTime = 0.05;
+          video.play().catch(() => {});
+        }
+      }
+    };
+
     const activeEl = isMobile ? mobileVideoRef.current : desktopVideoRef.current;
 
     // Attempt autoplay immediately
@@ -113,6 +125,9 @@ export default function Hero() {
 
     // Auto resume if paused by browser automatically
     if (activeEl) activeEl.addEventListener("pause", handleResume);
+    
+    // Bind seamless loop listener to prevent loop pause stutter
+    if (activeEl) activeEl.addEventListener("timeupdate", handleSeamlessLoop);
 
     // Trigger on scroll to ensure it plays while scrolling
     const handleScrollPlay = () => {
@@ -134,7 +149,10 @@ export default function Hero() {
     window.addEventListener("click", resumePlayback, { passive: true });
 
     return () => {
-      if (activeEl) activeEl.removeEventListener("pause", handleResume);
+      if (activeEl) {
+        activeEl.removeEventListener("pause", handleResume);
+        activeEl.removeEventListener("timeupdate", handleSeamlessLoop);
+      }
       window.removeEventListener("scroll", handleScrollPlay);
       window.removeEventListener("touchstart", resumePlayback);
       window.removeEventListener("click", resumePlayback);

@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Send, CheckCircle2, Mail, MapPin, Clock } from "lucide-react";
+import { Send, CheckCircle2, Mail, MapPin, Clock, Phone } from "lucide-react";
 
 export default function Contact() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
@@ -77,8 +77,9 @@ export default function Contact() {
             {/* Quick contact rows */}
             <div className="space-y-4">
               {[
-                { icon: Mail, label: "Email Me", val: "hello@vivekrautela.com", link: "mailto:hello@vivekrautela.com" },
-                { icon: MapPin, label: "Location", val: "Mumbai, India", link: null },
+                { icon: Mail, label: "Email Me", val: "vivekrautela03@gmail.com", link: "mailto:vivekrautela03@gmail.com" },
+                { icon: Phone, label: "Call / WhatsApp", val: "+91 9068850966", link: "tel:+919068850966" },
+                { icon: MapPin, label: "Location", val: "Dehradun, Uttarakhand", link: null },
                 { icon: Clock, label: "Availability", val: "Open for contracts & freelance", link: null },
               ].map((row, idx) => (
                 <motion.div

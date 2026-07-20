@@ -1,12 +1,13 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
-import { Cpu, Video, Layers } from "lucide-react";
+import * as LucideIcons from "lucide-react";
+import { supabase } from "../lib/supabase";
 
-const SKILL_CATEGORIES = [
+const STATIC_SKILL_CATEGORIES = [
   {
     title: "AI & Modern Tools",
-    icon: Cpu,
+    iconName: "Cpu",
     skills: [
       "Prompt Engineering",
       "ChatGPT / GPT APIs",
@@ -26,7 +27,7 @@ const SKILL_CATEGORIES = [
   },
   {
     title: "Filmmaking & Direction",
-    icon: Video,
+    iconName: "Video",
     skills: [
       "Film Direction",
       "Creative Direction",
@@ -44,7 +45,7 @@ const SKILL_CATEGORIES = [
   },
   {
     title: "UI/UX Design",
-    icon: Layers,
+    iconName: "Layers",
     skills: [
       "Figma",
       "UI Design",
@@ -61,6 +62,43 @@ const SKILL_CATEGORIES = [
 ];
 
 export default function Skills() {
+  const [skillsList, setSkillsList] = React.useState<any[]>([]);
+
+  const getIconComponent = (name: string) => {
+    const Icon = (LucideIcons as any)[name];
+    return Icon || LucideIcons.Cpu;
+  };
+
+  React.useEffect(() => {
+    // Format static categories with real components on load
+    const formattedStatic = STATIC_SKILL_CATEGORIES.map(cat => ({
+      title: cat.title,
+      icon: getIconComponent(cat.iconName),
+      skills: cat.skills
+    }));
+    setSkillsList(formattedStatic);
+
+    const loadSkills = async () => {
+      try {
+        const { data, error } = await supabase
+          .from("skills")
+          .select("*")
+          .order("created_at", { ascending: true });
+
+        if (!error && data && data.length > 0) {
+          const formatted = data.map((s) => ({
+            title: s.title,
+            icon: getIconComponent(s.icon_name),
+            skills: s.skills || []
+          }));
+          setSkillsList(formatted);
+        }
+      } catch (err) {
+        console.warn("Could not fetch skills from Supabase. Falling back to static data.");
+      }
+    };
+    loadSkills();
+  }, []);
   return (
     <section id="skills" className="relative py-24 md:py-32 bg-[#ffffff] z-10">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
@@ -90,7 +128,7 @@ export default function Skills() {
 
         {/* Skills Cards Grid / Horizontal Scroll on Mobile */}
         <div className="flex flex-row overflow-x-auto snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] gap-5 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-8 pb-6 md:pb-0">
-          {SKILL_CATEGORIES.map((category, idx) => (
+          {skillsList.map((category, idx) => (
             <motion.div
               key={idx}
               initial={{ opacity: 0, y: 40 }}
@@ -130,7 +168,7 @@ export default function Skills() {
 
                   {/* Skills (card__bio / skills list) */}
                   <div className="flex flex-wrap gap-2.5 mt-auto pt-2">
-                    {category.skills.map((skill, sIdx) => (
+                    {category.skills.map((skill: string, sIdx: number) => (
                       <span
                         key={sIdx}
                         className="text-[10px] px-3 py-1.5 rounded-full bg-black/[0.02] border border-black/[0.04] text-slate-700 font-semibold transition-all duration-300 hover:text-white hover:bg-black hover:border-black"

@@ -64,12 +64,12 @@ export default function Contact() {
     window.addEventListener("resize", handleResize);
 
     // Initial play bubbles setup inside the contact sandbox box
-    const bubbleCount = 18;
+    const bubbleCount = 12;
     const playBubbles: PlayBubble[] = [];
     const sparkles: Sparkle[] = [];
 
     const createPlayBubble = (w: number, h: number): PlayBubble => {
-      const radius = Math.random() * 25 + 15; // 15px to 40px (bigger size)
+      const radius = Math.random() * 45 + 30; // 30px to 75px (giant sizes!)
       const colorRand = Math.random();
       // Theme colors: Blue (#00d2ff) or Purple (#9d4edd)
       const color = colorRand > 0.5 ? "0, 210, 255" : "157, 78, 221"; 
@@ -104,13 +104,13 @@ export default function Contact() {
 
         if (dist < bubble.r + 8) {
           // Generate burst sparkles
-          for (let j = 0; j < 10; j++) {
+          for (let j = 0; j < 12; j++) {
             sparkles.push({
               x: bubble.x,
               y: bubble.y,
-              r: Math.random() * 3 + 1,
-              vx: (Math.random() - 0.5) * 5,
-              vy: (Math.random() - 0.5) * 5,
+              r: Math.random() * 3 + 1.5,
+              vx: (Math.random() - 0.5) * 6,
+              vy: (Math.random() - 0.5) * 6,
               opacity: 1,
               color: bubble.color,
               life: 25
@@ -121,7 +121,7 @@ export default function Contact() {
 
           // Auto-spawn replacement after a delay
           setTimeout(() => {
-            if (playBubbles.length < 22) {
+            if (playBubbles.length < 14) {
               playBubbles.push(createPlayBubble(canvas.width, canvas.height));
             }
           }, 1500);
@@ -130,8 +130,8 @@ export default function Contact() {
       }
 
       // Click to spawn a bubble if we didn't pop any
-      if (!popped && playBubbles.length < 30) {
-        const radius = Math.random() * 25 + 15; // 15px to 40px (bigger size)
+      if (!popped && playBubbles.length < 18) {
+        const radius = Math.random() * 45 + 30; // 30px to 75px (giant sizes!)
         const colorRand = Math.random();
         const color = colorRand > 0.5 ? "0, 210, 255" : "157, 78, 221";
         playBubbles.push({

@@ -69,7 +69,7 @@ export default function Contact() {
     const sparkles: Sparkle[] = [];
 
     const createPlayBubble = (w: number, h: number): PlayBubble => {
-      const radius = Math.random() * 16 + 8; // 8px to 24px
+      const radius = Math.random() * 25 + 15; // 15px to 40px (bigger size)
       const colorRand = Math.random();
       // Theme colors: Blue (#00d2ff) or Purple (#9d4edd)
       const color = colorRand > 0.5 ? "0, 210, 255" : "157, 78, 221"; 
@@ -131,7 +131,7 @@ export default function Contact() {
 
       // Click to spawn a bubble if we didn't pop any
       if (!popped && playBubbles.length < 30) {
-        const radius = Math.random() * 15 + 8;
+        const radius = Math.random() * 25 + 15; // 15px to 40px (bigger size)
         const colorRand = Math.random();
         const color = colorRand > 0.5 ? "0, 210, 255" : "157, 78, 221";
         playBubbles.push({

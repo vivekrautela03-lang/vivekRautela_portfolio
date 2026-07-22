@@ -203,29 +203,68 @@ export default function Contact() {
           bubble.vy *= -1;
         }
 
-        // Draw bubble body
+        // Draw transparent 3D glass bubble body
         ctx.beginPath();
-        const grad = ctx.createRadialGradient(
+        const bodyGrad = ctx.createRadialGradient(
           bubble.x - bubble.r / 3,
           bubble.y - bubble.r / 3,
-          bubble.r / 6,
+          bubble.r / 8,
           bubble.x,
           bubble.y,
           bubble.r
         );
-        grad.addColorStop(0, `rgba(255, 255, 255, ${bubble.opacity * 1.5})`);
-        grad.addColorStop(0.3, `rgba(${bubble.color}, ${bubble.opacity})`);
-        grad.addColorStop(1, `rgba(${bubble.color}, 0)`);
-
-        ctx.fillStyle = grad;
+        bodyGrad.addColorStop(0, "rgba(255, 255, 255, 0.4)");
+        bodyGrad.addColorStop(0.2, `rgba(${bubble.color}, 0.05)`);
+        bodyGrad.addColorStop(0.8, `rgba(${bubble.color}, 0.02)`);
+        bodyGrad.addColorStop(1, `rgba(${bubble.color}, 0.12)`); // soft colored rim glow
+        ctx.fillStyle = bodyGrad;
         ctx.arc(bubble.x, bubble.y, bubble.r, 0, Math.PI * 2);
         ctx.fill();
 
-        // White sheen border
+        // Bright white specular light reflection (top-left glare)
         ctx.beginPath();
-        ctx.strokeStyle = `rgba(255, 255, 255, ${bubble.opacity * 0.4})`;
-        ctx.lineWidth = 0.75;
+        const glareGrad = ctx.createRadialGradient(
+          bubble.x - bubble.r / 2.5,
+          bubble.y - bubble.r / 2.5,
+          0,
+          bubble.x - bubble.r / 2.5,
+          bubble.y - bubble.r / 2.5,
+          bubble.r / 3
+        );
+        glareGrad.addColorStop(0, "rgba(255, 255, 255, 0.65)");
+        glareGrad.addColorStop(1, "rgba(255, 255, 255, 0)");
+        ctx.fillStyle = glareGrad;
+        ctx.arc(bubble.x - bubble.r / 2.5, bubble.y - bubble.r / 2.5, bubble.r / 3, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Secondary soft reflection highlight (bottom-right refraction)
+        ctx.beginPath();
+        const refGrad = ctx.createRadialGradient(
+          bubble.x + bubble.r / 3,
+          bubble.y + bubble.r / 3,
+          0,
+          bubble.x + bubble.r / 3,
+          bubble.y + bubble.r / 3,
+          bubble.r / 2
+        );
+        refGrad.addColorStop(0, "rgba(255, 255, 255, 0.2)");
+        refGrad.addColorStop(1, "rgba(255, 255, 255, 0)");
+        ctx.fillStyle = refGrad;
+        ctx.arc(bubble.x + bubble.r / 3, bubble.y + bubble.r / 3, bubble.r / 2, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Primary outer glass sheen border outline
+        ctx.beginPath();
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.4)";
+        ctx.lineWidth = 1;
         ctx.arc(bubble.x, bubble.y, bubble.r, 0, Math.PI * 2);
+        ctx.stroke();
+
+        // Secondary colored outer halo border to separate it from white background
+        ctx.beginPath();
+        ctx.strokeStyle = `rgba(${bubble.color}, 0.22)`;
+        ctx.lineWidth = 2;
+        ctx.arc(bubble.x, bubble.y, bubble.r + 0.5, 0, Math.PI * 2);
         ctx.stroke();
       });
 
